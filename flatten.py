@@ -20,7 +20,7 @@
 #DestinationDirectory=
 
 # Append Categories (yes, no).
-# 
+#
 # If using the Destination Directory above, then this option will append the download category.
 #AppendCategories=no
 
@@ -54,19 +54,19 @@ if 'NZBPP_TOTALSTATUS' in os.environ:
 
 else:
     # Check par status
-    if os.environ.get('NZBPP_PARSTATUS') == '1' or os.environ.get('NZBPP_PARSTATUS') == '4':
+    if os.environ['NZBPP_PARSTATUS'] == '1' or os.environ['NZBPP_PARSTATUS'] == '4':
         print("[ERROR] Par-repair failed, setting status \"failed\".")
         status = 1
 
     # Check unpack status
-    if os.environ.get('NZBPP_UNPACKSTATUS') == '1':
+    if os.environ['NZBPP_UNPACKSTATUS'] == '1':
         print("[ERROR] Unpack failed, setting status \"failed\".")
         status = 1
 
     if os.environ.get('NZBPP_UNPACKSTATUS') == '0' and os.environ.get('NZBPP_PARSTATUS') == '0':
         # Unpack was skipped due to nzb-file properties or due to errors during par-check
 
-        if os.environ.get('NZBPP_HEALTH') < 1000:
+        if os.environ['NZBPP_HEALTH'] < 1000:
             print("[ERROR] Download health is compromised and Par-check/repair disabled or no .par2 files found. Setting status \"failed\".")
             print("[ERROR] Please check your Par-check/repair settings for future downloads.")
             status = 1
@@ -76,7 +76,7 @@ else:
             print("[WARNING] Please check your Par-check/repair settings for future downloads.")
 
 # Check if destination directory exists (important for reprocessing of history items)
-if not os.path.isdir(os.environ.get('NZBPP_DIRECTORY')):
+if not os.path.isdir(os.environ['NZBPP_DIRECTORY']):
     print("[ERROR] Nothing to post-process: destination directory", os.environ['NZBPP_DIRECTORY'], "doesn't exist. Setting status \"failed\".")
     status = 1
 
